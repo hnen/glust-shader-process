@@ -34,8 +34,8 @@ pub fn generate_rust_module(vert_path : &str, frag_path : &str, uniforms : &[Uni
         use glust::GlShaderUniform;
         use glust::GlError;
 
-        use renderer_glust::ShaderUniforms;
-        //use renderer_glust::ShaderVertexArray;
+        use glust_renderer::ShaderUniforms;
+        //use glust_renderer::ShaderVertexArray;
 
         type Result<T> = ::std::result::Result<T, GlError>;
 
@@ -70,14 +70,14 @@ pub fn generate_rust_module(vert_path : &str, frag_path : &str, uniforms : &[Uni
                 Ok(VertexArrayTmp(GlVertexArrayTmp::new(vec![ #vertex_array_fields_ref ])?))
             }
         }
-        impl ::renderer_glust::ShaderVertexArray for VertexArray {
+        impl ::glust_renderer::ShaderVertexArray for VertexArray {
             fn gl_vertex_array<'a>(&'a self) -> &'a GlVertexArray {
                 &self.0
             }
         }
 
-        impl ::renderer_glust::OfShader<Shader> for VertexArray {}
-        impl<'a> ::renderer_glust::OfShader<Shader> for VertexArrayTmp<'a> {}
+        impl ::glust_renderer::OfShader<Shader> for VertexArray {}
+        impl<'a> ::glust_renderer::OfShader<Shader> for VertexArrayTmp<'a> {}
 
         impl HasGlVertexArrayHandle for VertexArray {
             fn gl_vao_handle(&self) -> u32 {
@@ -90,7 +90,7 @@ pub fn generate_rust_module(vert_path : &str, frag_path : &str, uniforms : &[Uni
             }
         }
 
-        impl ::renderer_glust::Shader for Shader {
+        impl ::glust_renderer::Shader for Shader {
             type VertexArray = VertexArray;
             type Uniforms = Uniforms;
 
